@@ -6,18 +6,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user_event")
-public class UserEvent {
+@Table(name = "tickets")
+public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @ManyToOne
@@ -28,9 +28,10 @@ public class UserEvent {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    @Column(name = "attending")
-    private boolean attending;
+    @ManyToOne
+    @JoinColumn(name = "user_event_id")
+    private UserEvent userEvent;
 
-    @OneToMany(mappedBy = "userEvent")
-    private List<Ticket> tickets;
+    @Column(name = "price")
+    private BigDecimal price;
 }
