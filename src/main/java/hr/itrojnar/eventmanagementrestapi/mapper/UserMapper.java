@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class UserMapper {
 
     public UserDTO toDto(final User user) {
-        return UserDTO.withEvents(user.getId(), user.getUsername(), user.getUserType());
+        return UserDTO.withEvents(user.getId(), user.getUsername(), user.getPassword(), user.getUserType());
     }
 
     public User toEntity(final UserDTO userDTO) {

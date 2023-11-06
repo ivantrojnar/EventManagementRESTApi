@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Builder
-public record UserDTO(Long id, String username, UserType userType, List<UserEventDTO> allEvents) {
+public record UserDTO(Long id, String username, String password, UserType userType, List<UserEventDTO> allEvents) {
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -19,7 +19,7 @@ public record UserDTO(Long id, String username, UserType userType, List<UserEven
         return this.id.equals(((UserDTO) obj).id);
     }
 
-    public static UserDTO withEvents(Long id, String username, UserType userType) {
-        return new UserDTO(id, username, userType, new ArrayList<>());
+    public static UserDTO withEvents(Long id, String username, String password,UserType userType) {
+        return new UserDTO(id, username, password, userType, new ArrayList<>());
     }
 }

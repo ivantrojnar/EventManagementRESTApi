@@ -1,4 +1,4 @@
-package hr.itrojnar.eventmanagementrestapi;
+package hr.itrojnar.eventmanagementrestapi.controller;
 
 import hr.itrojnar.eventmanagementrestapi.model.UserDTO;
 import hr.itrojnar.eventmanagementrestapi.service.UserService;
