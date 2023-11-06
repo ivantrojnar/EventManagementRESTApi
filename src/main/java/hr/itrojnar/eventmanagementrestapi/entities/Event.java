@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @Entity
 @Builder
@@ -35,4 +37,7 @@ public class Event {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "date")
+    private LocalDate date;
 }
