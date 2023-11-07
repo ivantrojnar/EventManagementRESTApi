@@ -3,6 +3,7 @@ package hr.itrojnar.eventmanagementrestapi.security;
 import hr.itrojnar.eventmanagementrestapi.repository.UserRepository;
 import hr.itrojnar.eventmanagementrestapi.service.security.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -25,21 +26,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthFilter authFilter;
+    private final UserRepository userRepository;
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
+        return new UserDetailsServiceImpl(userRepository);
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf().disable()
                 .authorizeHttpRequests()
-                //.requestMatchers("/auth/**", "/auth/refreshToken", "/users/**").permitAll()
-                .requestMatchers("/**").permitAll()
-                //.and()
-                //.authorizeHttpRequests()
-                //.requestMatchers("/users/**").authenticated()
+                .requestMatchers("/auth/**", "/auth/refreshToken", "/users/**").permitAll()
+                //.requestMatchers("/**").permitAll()
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers("/events/**").authenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

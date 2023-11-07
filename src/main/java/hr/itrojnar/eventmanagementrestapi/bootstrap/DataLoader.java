@@ -3,6 +3,7 @@ package hr.itrojnar.eventmanagementrestapi.bootstrap;
 import hr.itrojnar.eventmanagementrestapi.entities.UserType;
 import hr.itrojnar.eventmanagementrestapi.model.EventDTO;
 import hr.itrojnar.eventmanagementrestapi.model.UserDTO;
+import hr.itrojnar.eventmanagementrestapi.service.EventService;
 import hr.itrojnar.eventmanagementrestapi.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class DataLoader implements CommandLineRunner {
     private final UserService userService;
+    private final EventService eventService;
 
     @Override
     public void run(String... args) throws Exception {
