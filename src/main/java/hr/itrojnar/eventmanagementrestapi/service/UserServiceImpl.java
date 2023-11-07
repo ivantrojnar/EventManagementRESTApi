@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,6 +21,17 @@ public class UserServiceImpl implements UserService {
     public List<UserDTO> findAll() {
         final List<User> users = userRepository.findAll();
         return users.stream().map(userMapper::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<User> findByUsernameAndPassword(String username, String password) {
+        List<User> users = userRepository.findAll();
+
+        Optional<User> user = users.stream()
+                .filter(u -> u.getUsername().equals(username) && u.getPassword().equals(password))
+                .findFirst();
+
+        return user;
     }
 
     @Override

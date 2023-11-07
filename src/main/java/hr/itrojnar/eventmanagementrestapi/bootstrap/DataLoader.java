@@ -1,11 +1,14 @@
 package hr.itrojnar.eventmanagementrestapi.bootstrap;
 
 import hr.itrojnar.eventmanagementrestapi.entities.UserType;
+import hr.itrojnar.eventmanagementrestapi.model.EventDTO;
 import hr.itrojnar.eventmanagementrestapi.model.UserDTO;
 import hr.itrojnar.eventmanagementrestapi.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 @AllArgsConstructor
@@ -26,5 +29,30 @@ public class DataLoader implements CommandLineRunner {
         userService.save(user2);
 
         System.out.println("All users successfully loaded!");
+
+        System.out.println("Events about to load...");
+
+        final EventDTO event1 = EventDTO.builder()
+                .name("Event 1")
+                .maxAttendees(50)
+                .numAttendees(0)
+                .address("Event Address 1")
+                .description("Event Description 1")
+                .date(LocalDate.now().plusDays(7))
+                .build();
+
+        final EventDTO event2 = EventDTO.builder()
+                .name("Event 2")
+                .maxAttendees(30)
+                .numAttendees(0)
+                .address("Event Address 2")
+                .description("Event Description 2")
+                .date(LocalDate.now().plusDays(14))
+                .build();
+
+        eventService.save(event1);
+        eventService.save(event2);
+
+        System.out.println("All events successfully loaded!");
     }
 }

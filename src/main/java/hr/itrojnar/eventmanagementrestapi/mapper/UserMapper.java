@@ -22,6 +22,7 @@ public class UserMapper {
         return User.builder()
                 .id(userDTO.id())
                 .username(userDTO.username())
+                .password(userDTO.password())
                 .userType(userDTO.userType())
                 .build();
     }

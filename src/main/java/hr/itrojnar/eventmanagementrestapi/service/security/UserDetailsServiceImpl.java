@@ -1,5 +1,6 @@
 package hr.itrojnar.eventmanagementrestapi.service.security;
 
+import hr.itrojnar.eventmanagementrestapi.entities.User;
 import hr.itrojnar.eventmanagementrestapi.repository.UserRepository;
 import hr.itrojnar.eventmanagementrestapi.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -21,10 +23,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (!username.equals("ivan")) {
+        /*if (!username.equals("ivan")) {
             throw new UsernameNotFoundException("User not found...");
-        }
+        }*/
+        List<User> users = userRepository.findAll();
+        Optional<User> userOptional = users.stream()
+                .filter(u -> u.getUsername().equals(username))
+                .findFirst();
+
+        User user = userOptional.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        // Log username and encoded password
+        System.out.println("Username: " + user.getUsername());
+        System.out.println("Encoded Password: " + user.getPassword());
+
         final PasswordEncoder encoder = new BCryptPasswordEncoder();
-        return new UserDetailsImpl(username, encoder.encode("password"), List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+        return new UserDetailsImpl(user.getUsername(), encoder.encode(user.getPassword()), List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
     }
 }
