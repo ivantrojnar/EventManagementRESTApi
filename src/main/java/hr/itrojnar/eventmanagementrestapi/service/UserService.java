@@ -10,4 +10,6 @@ public interface UserService {
     List<UserDTO> findAll();
     Optional<User> findByUsernameAndPassword(String username, String password);
     void save(UserDTO newUser);
+
+    UserDTO findUserDetails(String username, String password);
 }

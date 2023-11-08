@@ -1,12 +1,11 @@
 package hr.itrojnar.eventmanagementrestapi.controller;
 
+import hr.itrojnar.eventmanagementrestapi.model.AuthRequest;
 import hr.itrojnar.eventmanagementrestapi.model.UserDTO;
 import hr.itrojnar.eventmanagementrestapi.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,15 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> getAllUsers() {
         return ResponseEntity.ok(userService.findAll());
+    }
+
+    @PostMapping("/details")
+    public ResponseEntity<UserDTO> getUserDetails(@RequestBody AuthRequest authRequest) {
+        String username = authRequest.getUsername();
+        String password = authRequest.getPassword();
+
+        UserDTO userDTO = userService.findUserDetails(username, password);
+
+        return ResponseEntity.ok(userDTO);
     }
 }
