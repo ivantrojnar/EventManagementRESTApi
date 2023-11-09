@@ -30,4 +30,14 @@ public class UserController {
 
         return ResponseEntity.ok(userDTO);
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@RequestBody AuthRequest authRequest) {
+        String username = authRequest.getUsername();
+        String password = authRequest.getPassword();
+
+        userService.registerUser(username, password);
+
+        return ResponseEntity.ok("User registered successfully");
+    }
 }

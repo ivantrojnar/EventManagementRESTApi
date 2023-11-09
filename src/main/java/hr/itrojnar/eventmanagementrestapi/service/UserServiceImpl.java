@@ -3,6 +3,7 @@ package hr.itrojnar.eventmanagementrestapi.service;
 import hr.itrojnar.eventmanagementrestapi.entities.Ticket;
 import hr.itrojnar.eventmanagementrestapi.entities.User;
 import hr.itrojnar.eventmanagementrestapi.entities.UserEvent;
+import hr.itrojnar.eventmanagementrestapi.entities.UserType;
 import hr.itrojnar.eventmanagementrestapi.mapper.TicketMapper;
 import hr.itrojnar.eventmanagementrestapi.mapper.UserEventMapper;
 import hr.itrojnar.eventmanagementrestapi.mapper.UserMapper;
@@ -77,5 +78,11 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new UsernameNotFoundException("User not found");
         }
+    }
+
+    @Override
+    public void registerUser(String username, String password) {
+        UserDTO newUser = UserDTO.builder().username(username).password(password).userType(UserType.USER).build();
+        save(newUser);
     }
 }

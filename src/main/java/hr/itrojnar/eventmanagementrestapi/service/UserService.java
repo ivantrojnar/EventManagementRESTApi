@@ -12,4 +12,6 @@ public interface UserService {
     void save(UserDTO newUser);
 
     UserDTO findUserDetails(String username, String password);
+
+    void registerUser(String username, String password);
 }
