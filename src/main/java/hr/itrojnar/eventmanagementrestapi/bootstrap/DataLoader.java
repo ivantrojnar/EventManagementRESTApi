@@ -7,6 +7,8 @@ import hr.itrojnar.eventmanagementrestapi.service.EventService;
 import hr.itrojnar.eventmanagementrestapi.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -17,6 +19,7 @@ import java.time.LocalDate;
 public class DataLoader implements CommandLineRunner {
     private final UserService userService;
     private final EventService eventService;
+    private final ResourceLoader resourceLoader;
 
     @Override
     public void run(String... args) throws Exception {
@@ -35,8 +38,14 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Events about to load...");
 
+        Resource resource1 = resourceLoader.getResource("classpath:base64image.txt");
+        String base64Image1 = new String(resource1.getInputStream().readAllBytes());
+        Resource resource2 = resourceLoader.getResource("classpath:base64image2.txt");
+        String base64Image2 = new String(resource2.getInputStream().readAllBytes());
+
         final EventDTO event1 = EventDTO.builder()
                 .name("Event 1")
+                .picture(base64Image1)
                 .maxAttendees(50)
                 .numAttendees(0)
                 .address("Event Address 1")
@@ -47,6 +56,7 @@ public class DataLoader implements CommandLineRunner {
 
         final EventDTO event2 = EventDTO.builder()
                 .name("Event 2")
+                .picture(base64Image2)
                 .maxAttendees(30)
                 .numAttendees(0)
                 .address("Event Address 2")

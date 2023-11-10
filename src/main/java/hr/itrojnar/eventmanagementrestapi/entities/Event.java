@@ -21,7 +21,7 @@ public class Event {
     @GeneratedValue
     private Long id;
 
-    @Column(name = "picture")
+    @Column(name = "picture", length = 1000000)
     private String picture;
 
     @Column(name = "name")
