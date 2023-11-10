@@ -21,6 +21,7 @@ public class UserEventMapper {
                 .numAttendees(userEvent.getEvent().getNumAttendees())  // Assuming Event has a 'numAttendees' property
                 .description(userEvent.getEvent().getDescription())  // Assuming Event has a 'description' property
                 .date(userEvent.getEvent().getDate())  // Assuming Event has a 'date' property
+                .price(userEvent.getEvent().getPrice())
                 .tickets(tickets)
                 .build();
     }

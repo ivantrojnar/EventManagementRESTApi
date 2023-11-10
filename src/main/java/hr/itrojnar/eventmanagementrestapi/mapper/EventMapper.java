@@ -17,6 +17,7 @@ public class EventMapper {
                 .address(entity.getAddress())
                 .description(entity.getDescription())
                 .date(entity.getDate())
+                .price(entity.getPrice())
                 .build();
     }
 
@@ -30,6 +31,7 @@ public class EventMapper {
         event.setAddress(dto.address());
         event.setDescription(dto.description());
         event.setDate(dto.date());
+        event.setPrice(dto.price());
         return event;
     }
 }

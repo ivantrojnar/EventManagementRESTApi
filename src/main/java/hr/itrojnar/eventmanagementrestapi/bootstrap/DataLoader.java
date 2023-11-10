@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Component
@@ -41,6 +42,7 @@ public class DataLoader implements CommandLineRunner {
                 .address("Event Address 1")
                 .description("Event Description 1")
                 .date(LocalDate.now().plusDays(7))
+                .price(BigDecimal.valueOf(20))
                 .build();
 
         final EventDTO event2 = EventDTO.builder()
@@ -50,6 +52,7 @@ public class DataLoader implements CommandLineRunner {
                 .address("Event Address 2")
                 .description("Event Description 2")
                 .date(LocalDate.now().plusDays(14))
+                .price(BigDecimal.valueOf(25))
                 .build();
 
         eventService.save(event1);
