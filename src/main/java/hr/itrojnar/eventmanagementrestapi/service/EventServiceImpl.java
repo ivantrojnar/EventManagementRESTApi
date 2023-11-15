@@ -25,8 +25,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void save(EventDTO newEvent) {
+    public EventDTO save(EventDTO newEvent) {
         final Event eventToSave = eventMapper.toEntity(newEvent);
-        eventRepository.save(eventToSave);
+        return eventMapper.mapEntityToDTO(eventRepository.save(eventToSave));
     }
 }

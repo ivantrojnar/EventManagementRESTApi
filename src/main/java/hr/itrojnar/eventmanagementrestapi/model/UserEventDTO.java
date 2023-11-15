@@ -5,11 +5,12 @@ import lombok.Builder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 @Builder
-public record UserEventDTO(Long id, String name, String address, boolean attending, String picture, int maxAttendees, int numAttendees, String description, LocalDate date, BigDecimal price, List<TicketDTO> tickets) {
+public record UserEventDTO(Long id, String name, String address, boolean attending, String picture, int maxAttendees, int numAttendees, String description, LocalDateTime date, BigDecimal price, List<TicketDTO> tickets) {
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {

@@ -4,9 +4,7 @@ import hr.itrojnar.eventmanagementrestapi.model.EventDTO;
 import hr.itrojnar.eventmanagementrestapi.service.EventService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +18,11 @@ public class EventController {
     @GetMapping("/all")
     public ResponseEntity<List<EventDTO>> getAllEvents() {
         return ResponseEntity.ok(eventService.findAll());
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO) {
+        EventDTO savedEvent = eventService.save(eventDTO);
+        return ResponseEntity.ok(savedEvent);
     }
 }

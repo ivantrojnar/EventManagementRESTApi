@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 @AllArgsConstructor
@@ -50,7 +51,7 @@ public class DataLoader implements CommandLineRunner {
                 .numAttendees(0)
                 .address("Event Address 1")
                 .description("Event Description 1")
-                .date(LocalDate.now().plusDays(7))
+                .date(LocalDateTime.now().plusDays(7))
                 .price(BigDecimal.valueOf(20))
                 .build();
 
@@ -61,7 +62,7 @@ public class DataLoader implements CommandLineRunner {
                 .numAttendees(0)
                 .address("Event Address 2")
                 .description("Event Description 2")
-                .date(LocalDate.now().plusDays(14))
+                .date(LocalDateTime.now().plusDays(14))
                 .price(BigDecimal.valueOf(25))
                 .build();
 

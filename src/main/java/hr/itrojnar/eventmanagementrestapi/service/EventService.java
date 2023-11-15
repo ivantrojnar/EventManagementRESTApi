@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EventService {
     List<EventDTO> findAll();
-    void save(EventDTO newEvent);
+    EventDTO save(EventDTO newEvent);
 }
