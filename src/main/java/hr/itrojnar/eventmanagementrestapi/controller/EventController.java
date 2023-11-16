@@ -25,4 +25,10 @@ public class EventController {
         EventDTO savedEvent = eventService.save(eventDTO);
         return ResponseEntity.ok(savedEvent);
     }
+
+    @DeleteMapping("/delete/{eventId}")
+    public ResponseEntity<String> deleteEvent(@PathVariable Long eventId) {
+        eventService.deleteById(eventId);
+        return ResponseEntity.ok("Event with ID " + eventId + " deleted successfully.");
+    }
 }

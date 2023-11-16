@@ -7,4 +7,5 @@ import java.util.List;
 public interface EventService {
     List<EventDTO> findAll();
     EventDTO save(EventDTO newEvent);
+    void deleteById(Long eventId);
 }

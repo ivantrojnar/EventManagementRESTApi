@@ -29,4 +29,9 @@ public class EventServiceImpl implements EventService {
         final Event eventToSave = eventMapper.toEntity(newEvent);
         return eventMapper.mapEntityToDTO(eventRepository.save(eventToSave));
     }
+
+    @Override
+    public void deleteById(Long eventId) {
+        eventRepository.deleteById(eventId);
+    }
 }
