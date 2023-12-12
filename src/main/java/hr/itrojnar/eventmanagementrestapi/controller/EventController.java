@@ -3,6 +3,7 @@ package hr.itrojnar.eventmanagementrestapi.controller;
 import hr.itrojnar.eventmanagementrestapi.model.EventDTO;
 import hr.itrojnar.eventmanagementrestapi.service.EventService;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,9 @@ public class EventController {
     public ResponseEntity<List<EventDTO>> getAllEvents() {
         return ResponseEntity.ok(eventService.findAll());
     }
+
+    @GetMapping("/{eventId}")
+    public ResponseEntity<EventDTO> getEvent(@PathVariable Long eventId) { return ResponseEntity.ok(eventService.findEvent(eventId)); }
 
     @PostMapping("/create")
     public ResponseEntity<EventDTO> createEvent(@RequestBody EventDTO eventDTO) {

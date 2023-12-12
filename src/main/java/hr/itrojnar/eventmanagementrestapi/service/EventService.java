@@ -9,4 +9,6 @@ public interface EventService {
     EventDTO save(EventDTO newEvent);
     void deleteById(Long eventId);
     EventDTO update(EventDTO updatedEvent);
+
+    EventDTO findEvent(Long eventId);
 }

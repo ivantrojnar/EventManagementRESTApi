@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,8 +22,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<EventDTO> findAll() {
         return eventRepository.findAll().stream()
-                .map(eventMapper::mapEntityToDTO)
-                .collect(Collectors.toList());
+                .map(eventMapper::mapEntityToDTO).toList();
     }
 
     @Override
@@ -52,5 +52,10 @@ public class EventServiceImpl implements EventService {
         existingEvent.setPrice(updatedEvent.price());
 
         return eventMapper.mapEntityToDTO(eventRepository.save(existingEvent));
+    }
+
+    @Override
+    public EventDTO findEvent(Long eventId) {
+        return eventRepository.findById(eventId).map(eventMapper::mapEntityToDTO).orElse(null);
     }
 }
